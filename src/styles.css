@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+.App {
+  font-family: Roboto, Arial, sans-serif;
+  text-align: center;
+  color: white;
+}
+
+body {
+  background: #181818;
+}
