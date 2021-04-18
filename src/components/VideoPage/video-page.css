@@ -2,6 +2,8 @@
     padding: 1rem;
     display: flex;
     margin: auto;
+    margin-bottom: 5rem;
+    margin-top: 3.5rem;
     width: max-content;
 }
 
@@ -100,8 +102,21 @@
 }
 
 @media (max-width:550px) {
+
+    .video-wrapper {
+        width: 100vw;
+    }
+
     .video-page-container {
         padding: 0;
+    }
+
+    .video-details p {
+        max-width: 70vw;
+    }
+
+    .video-page-container .card-details {
+        max-width: 40vw;
     }
 
     .video-page-suggestion {
