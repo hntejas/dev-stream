@@ -1,4 +1,4 @@
-.navigator{
+.navigator {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -10,23 +10,29 @@
     background: #252525;
 }
 
-.nav-item{
+.nav-item {
     font-size: 1.3rem;
     padding: 1rem 0;
     cursor: pointer;
+    color: white;
+    text-decoration: none;
 }
 
-.nav-item:hover{
+.nav-item:hover {
     background: #181818;
 }
 
-.nav-item-name{
+.nav-item-name {
     font-size: 0.6rem;
     margin: 0.2rem 0;
 }
 
+.active-link {
+    background: #181818;
+}
+
 @media (max-width: 768px) {
-    .navigator{
+    .navigator {
         top: unset;
         bottom: 0;
         flex-direction: row;
@@ -35,7 +41,8 @@
         justify-content: space-evenly;
     }
 
-    .nav-item{
-        padding: 0.4rem 1rem;
+    .nav-item {
+        width: 25%;
+        padding: 0.4rem 0;
     }
 }

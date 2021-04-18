@@ -1,21 +1,21 @@
 import "./styles.css";
 import { Routes, Route } from "react-router-dom";
 
-import Header from "./components/Header/Header"
+import Header from "./components/Header/Header";
 import VideoList from "./components/VideoList/VideoList";
 import VideoPage from "./components/VideoPage/VideoPage";
-import Navigator from "./components/Navigator/Navigator"
+import Navigator from "./components/Navigator/Navigator";
 import { videos } from "./data";
 
 export default function App() {
   return (
-    <div className="App">      
+    <div className="App">
       <Header />
       <Navigator />
-      <div className="body-container">        
+      <div className="body-container">
         <Routes>
-          <Route path="/" element={<VideoList videos={videos}/>}></Route>
-          <Route path="/video/:embedId" element={<VideoPage/>}></Route>
+          <Route path="/" element={<VideoList videos={videos} />}></Route>
+          <Route path="/video/:embedId" element={<VideoPage />}></Route>
         </Routes>
       </div>
     </div>

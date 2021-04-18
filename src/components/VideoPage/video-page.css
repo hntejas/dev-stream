@@ -1,9 +1,13 @@
 .video-page-container {
-    padding: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    margin: auto;
+    width: max-content;
 }
 
 .video-page-left {
     width: 60%;
+    min-width: 50vw;
 }
 
 .video-wrapper {
@@ -11,6 +15,22 @@
     overflow: hidden;
     width: 100%;
     padding-top: 56.25%;
+}
+
+.video-details {
+    padding: 0 0.5rem;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.video-details p {
+    color: white;
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0.5rem 0;
+    margin-top: 1rem;
 }
 
 .iframe-video {
@@ -21,4 +41,70 @@
     right: 0;
     width: 100%;
     height: 100%;
+    z-index: 5;
+}
+
+.channel-logo {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    align-self: flex-start;
+    margin: 0.5rem;
+    margin-right: 0.8rem;
+}
+
+.video-page-suggestion {
+    margin-left: 1rem;
+}
+
+.video-page-container .card {
+    display: flex;
+    width: max-content;
+}
+
+.video-page-container .card-video-thumbnail {
+    width: 160px;
+    height: auto;
+}
+
+.video-page-container .card-details {
+    margin-left: 0.5rem;
+    max-width: 180px;
+}
+
+.video-page-container .card-title {
+    font-size: 0.8rem;
+}
+
+.video-page-container .card-video-stats {
+    font-size: 0.7rem;
+}
+
+.video-suggestion-heading {
+    margin-top: 0;
+    margin-left: 0.5rem;
+    text-align: left;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .video-page-container {
+        flex-direction: column;
+    }
+
+    .video-page-left {
+        width: 100%;
+        min-width: 90vw;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width:550px) {
+    .video-page-container {
+        padding: 0;
+    }
+
+    .video-page-suggestion {
+        margin-left: 0;
+    }
 }

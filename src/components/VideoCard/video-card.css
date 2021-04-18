@@ -6,7 +6,6 @@
   text-decoration: none;
 }
 
-
 .card-video-thumbnail {
   width: 100%;
 }
@@ -49,4 +48,11 @@
   line-height: 1.2rem;
   font-weight: 400;
   font-size: 0.8rem;
+}
+
+
+@media (max-width: 550px) {
+  .card {
+    width: 100%;
+  }
 }
