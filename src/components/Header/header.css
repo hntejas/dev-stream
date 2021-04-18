@@ -1,4 +1,4 @@
-.header{
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,7 +12,7 @@
     top: 0
 }
 
-.header-logo{
+.header-logo {
     font-size: 1.8rem;
-    font-weight: bold;
+    font-weight: 500;
 }

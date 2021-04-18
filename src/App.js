@@ -3,15 +3,16 @@ import { Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header/Header"
 import VideoList from "./components/VideoList/VideoList";
-import VideoPage from "./components/VideoPage/VideoPage"
+import VideoPage from "./components/VideoPage/VideoPage";
+import Navigator from "./components/Navigator/Navigator"
 import { videos } from "./data";
 
 export default function App() {
   return (
     <div className="App">      
       <Header />
-
-      <div className="body-container">
+      <Navigator />
+      <div className="body-container">        
         <Routes>
           <Route path="/" element={<VideoList videos={videos}/>}></Route>
           <Route path="/video/:embedId" element={<VideoPage/>}></Route>

@@ -1,0 +1,41 @@
+.navigator{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: fixed;
+    left: 0;
+    top: 3.2rem;
+    height: 100%;
+    min-width: 4rem;
+    background: #252525;
+}
+
+.nav-item{
+    font-size: 1.3rem;
+    padding: 1rem 0;
+    cursor: pointer;
+}
+
+.nav-item:hover{
+    background: #181818;
+}
+
+.nav-item-name{
+    font-size: 0.6rem;
+    margin: 0.2rem 0;
+}
+
+@media (max-width: 768px) {
+    .navigator{
+        top: unset;
+        bottom: 0;
+        flex-direction: row;
+        width: 100%;
+        height: max-content;
+        justify-content: space-evenly;
+    }
+
+    .nav-item{
+        padding: 0.4rem 1rem;
+    }
+}

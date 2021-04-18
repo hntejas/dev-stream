@@ -6,28 +6,30 @@
   text-decoration: none;
 }
 
+
 .card-video-thumbnail {
   width: 100%;
 }
 
 .card-details {
-  padding: 0.2rem 0.3rem;
+  padding: 0.2rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
 }
 
-.card-details > p {
+.card-details>p {
   margin: 0;
   text-align: left;
 }
 
 .card-title {
+  font-family: Roboto, Arial, sans-serif;
   display: block;
   width: calc(100%);
   line-height: 1.3rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.5px;
   max-height: 2.6rem;
   overflow: hidden;
@@ -37,14 +39,14 @@
 
 .card-channel-title {
   color: #aaaaaa;
-  font-size: 0.95rem;
-  line-height: 1.4rem;
+  font-size: 0.85rem;
+  line-height: 1.2rem;
   font-weight: 400;
 }
 
 .card-video-stats {
   color: #aaaaaa;
-  line-height: 1.4rem;
+  line-height: 1.2rem;
   font-weight: 400;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
 }
