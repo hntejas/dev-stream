@@ -8,4 +8,9 @@
 
 body {
   background: #181818;
+  margin: 0;
+}
+
+.body-container{
+  margin-top: 3.5rem
 }
