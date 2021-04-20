@@ -5,12 +5,12 @@ export const UserContext = createContext();
 
 export const initialUserState = {
   history: [],
-  likedVideos: [],
+  likedVideos: ["No8qdcVYiQw", "u6_a0d94A1Q"],
   playlists: [
     {
       id: 1,
       name: "Playlist 1",
-      videos: ["iiADhChRriM"],
+      videos: ["KUJsaM-hAjs", "Vi4Pr8bUMZs"],
     },
   ],
 };

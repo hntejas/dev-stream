@@ -32,6 +32,11 @@ export default function VideoPage() {
         videoEmbedId: embedId,
       },
     });
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
   }, [embedId]);
 
   const { title, views, age, channel, likes } = videos.find(
