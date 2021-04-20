@@ -18,6 +18,11 @@ body {
   margin-right: 4rem;
 }
 
+.section-heading {
+  font-weight: 500;
+  padding-top: 1rem;
+}
+
 @media (max-width: 768px) {
   .body-container {
     margin-left: 0;

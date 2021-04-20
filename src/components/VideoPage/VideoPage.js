@@ -1,15 +1,46 @@
-import { videos } from "../../data";
+import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { RiThumbUpFill, RiPlayListAddFill } from "react-icons/ri";
+import { IoIosShareAlt } from "react-icons/io";
+
 import VideoCard from "../VideoCard/VideoCard";
+import { UserContext } from "../../store/UserContext/UserContext";
+
+import * as userActionTypes from "../../store/types/userActionTypes";
 import { convertToShortNumber } from "../../utils";
+import { videos } from "../../data";
+
 import "./video-page.css";
 
 export default function VideoPage() {
+  const { user, userDispatch } = useContext(UserContext);
+
   const { embedId } = useParams();
 
-  const { title, views, age, channel } = videos.find(
+  useEffect(() => {
+    userDispatch({
+      type: userActionTypes.UPDATE_HISTORY,
+      payload: {
+        videoEmbedId: embedId,
+      },
+    });
+  }, [embedId]);
+
+  const { title, views, age, channel, likes } = videos.find(
     (video) => video.embedId === embedId
   );
+
+  const isVideoLiked = user.likedVideos.includes(embedId);
+
+  const videoLikeHandler = () => {
+    userDispatch({
+      type: userActionTypes.TOGGLE_LIKED_VIDEO,
+      payload: {
+        videoEmbedId: embedId,
+        isVideoAlreadyLiked: isVideoLiked,
+      },
+    });
+  };
 
   return (
     <div className="video-page-container">
@@ -17,7 +48,7 @@ export default function VideoPage() {
         <div className="video-wrapper">
           <iframe
             className="iframe-video"
-            src={"https://www.youtube.com/embed/" + embedId}
+            src={"https://www.youtube.com/embed/" + embedId + "?enablejsapi"}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -33,6 +64,20 @@ export default function VideoPage() {
             • <span className="card-video-age">{channel.title}</span> •{" "}
             <span className="card-video-age">{age} ago</span>
           </div>
+          <div className="video-actions">
+            <div className="video-action-item" onClick={videoLikeHandler}>
+              <RiThumbUpFill
+                style={{ color: isVideoLiked ? "#3EA6FF" : "white" }}
+              />{" "}
+              <span>{convertToShortNumber(likes)}</span>
+            </div>
+            <div className="video-action-item">
+              <IoIosShareAlt /> <span>SHARE</span>
+            </div>
+            <div className="video-action-item">
+              <RiPlayListAddFill /> <span>SAVE</span>
+            </div>
+          </div>
         </div>
       </div>
       <div className="video-page-suggestion">
@@ -41,7 +86,7 @@ export default function VideoPage() {
           if (video.embedId === embedId) {
             return null;
           }
-          return <VideoCard video={video} />;
+          return <VideoCard video={video} key={video.id} />;
         })}
       </div>
     </div>

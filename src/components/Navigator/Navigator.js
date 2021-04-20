@@ -19,13 +19,9 @@ export default function Navigator() {
         <RiPlayListAddFill />
         <p className="nav-item-name">Playlist</p>
       </NavLink>
-      <NavLink
-        to="/watchlist"
-        activeClassName="active-link"
-        className="nav-item"
-      >
+      <NavLink to="/history" activeClassName="active-link" className="nav-item">
         <AiOutlineFieldTime />
-        <p className="nav-item-name">Watchlist</p>
+        <p className="nav-item-name">History</p>
       </NavLink>
       <NavLink to="/likes" activeClassName="active-link" className="nav-item">
         <AiOutlineLike />

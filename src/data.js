@@ -5,6 +5,7 @@ export const videos = [
     title: "Learn JSON in 10 Minutes",
     views: 109,
     age: "1 Years",
+    likes: 10000,
     channel: {
       id: "1",
       title: "FreeCodeCamp",
@@ -21,6 +22,7 @@ export const videos = [
     title: "Learn HTML5 and CSS3 From Scratch - Full Course",
     views: 1090128,
     age: "1 Years",
+    likes: 10022,
     channel: {
       id: "1",
       title: "FreeCodeCamp",
@@ -37,6 +39,7 @@ export const videos = [
     title: "Learn JSON in 10 Minutes",
     views: 1090128,
     age: "1 Years",
+    likes: 10022,
     channel: {
       id: "1",
       title: "FreeCodeCamp",
@@ -53,6 +56,7 @@ export const videos = [
     title: "Learn JSON in 10 Minutes",
     views: 1090128,
     age: "1 Years",
+    likes: 10022,
     channel: {
       id: "1",
       title: "FreeCodeCamp",
@@ -69,6 +73,7 @@ export const videos = [
     title: "Learn JSON in 10 Minutes",
     views: 1090128,
     age: "1 Years",
+    likes: 10022,
     channel: {
       id: "1",
       title: "FreeCodeCamp",
@@ -85,6 +90,7 @@ export const videos = [
     title: "Learn JSON in 10 Minutes",
     views: 1090128,
     age: "1 Years",
+    likes: 10022,
     channel: {
       id: "1",
       title: "FreeCodeCamp",
@@ -101,6 +107,7 @@ export const videos = [
     title: "Learn JSON in 10 Minutes",
     views: 1090128,
     age: "1 Years",
+    likes: 10022,
     channel: {
       id: "1",
       title: "FreeCodeCamp",
@@ -117,6 +124,7 @@ export const videos = [
     title: "Learn JSON in 10 Minutes",
     views: 1090128,
     age: "1 Years",
+    likes: 10022,
     channel: {
       id: "1",
       title: "FreeCodeCamp",
@@ -133,6 +141,7 @@ export const videos = [
     title: "Learn JSON in 10 Minutes",
     views: 1090128,
     age: "1 Years",
+    likes: 10022,
     channel: {
       id: "1",
       title: "FreeCodeCamp",
@@ -149,6 +158,7 @@ export const videos = [
     title: "Learn JSON in 10 Minutes",
     views: 1090128,
     age: "1 Years",
+    likes: 10022,
     channel: {
       id: "1",
       title: "FreeCodeCamp",
@@ -165,6 +175,7 @@ export const videos = [
     title: "Learn JSON in 10 Minutes",
     views: 1090128,
     age: "1 Years",
+    likes: 10022,
     channel: {
       id: "1",
       title: "FreeCodeCamp",
@@ -181,6 +192,7 @@ export const videos = [
     title: "Learn JSON in 10 Minutes",
     views: 1090128,
     age: "1 Years",
+    likes: 10022,
     channel: {
       id: "1",
       title: "FreeCodeCamp",
@@ -197,6 +209,7 @@ export const videos = [
     title: "Learn JSON in 10 Minutes",
     views: 1090128,
     age: "1 Years",
+    likes: 10022,
     channel: {
       id: "1",
       title: "FreeCodeCamp",
@@ -213,6 +226,7 @@ export const videos = [
     title: "Learn JSON in 10 Minutes",
     views: 1090128,
     age: "1 Years",
+    likes: 10022,
     channel: {
       id: "1",
       title: "FreeCodeCamp",
