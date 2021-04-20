@@ -73,11 +73,15 @@ export default function VideoPage() {
             <span className="card-video-age">{age} ago</span>
           </div>
           <div className="video-actions">
-            <div className="video-action-item" onClick={videoLikeHandler}>
-              <RiThumbUpFill
-                style={{ color: isVideoLiked ? "#3EA6FF" : "white" }}
-              />{" "}
-              <span>{convertToShortNumber(likes)}</span>
+            <div
+              className="video-action-item"
+              onClick={videoLikeHandler}
+              style={{ color: isVideoLiked ? "#3EA6FF" : "white" }}
+            >
+              <RiThumbUpFill />{" "}
+              <span>
+                {convertToShortNumber(isVideoLiked ? likes + 1 : likes)}
+              </span>
             </div>
             <div className="video-action-item">
               <IoIosShareAlt /> <span>SHARE</span>

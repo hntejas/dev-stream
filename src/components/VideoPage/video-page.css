@@ -60,6 +60,10 @@
     cursor: pointer;
 }
 
+.video-action-item svg {
+    font-size: 1.2rem;
+}
+
 .video-action-item span {
     margin-left: 0.3rem;
 }

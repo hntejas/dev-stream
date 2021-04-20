@@ -39,7 +39,7 @@ export default function PlaylistForm({
   return (
     <div className="playlist-form">
       <h3 className="section-heading">Your Playlists</h3>
-      <span class="close" onClick={onPlaylistModalClose}>
+      <span className="close" onClick={onPlaylistModalClose}>
         &times;
       </span>
       <ul className="playlist-list">
