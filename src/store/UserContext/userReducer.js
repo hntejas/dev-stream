@@ -22,12 +22,54 @@ const updateHistory = (state, { videoEmbedId }) => {
   return stateCopy;
 };
 
+const createPlaylist = (state, { playlistName }) => {
+  const stateCopy = { ...state };
+
+  stateCopy.playlists = state.playlists.concat({
+    id: state.playlists.length + 1 || 1,
+    name: playlistName,
+    videos: [],
+  });
+
+  return stateCopy;
+};
+
+const addToPlaylist = (state, { playlistId, videoEmbedId }) => {
+  const stateCopy = { ...state };
+  stateCopy.playlists = state.playlists.map((playlist) => {
+    if (playlist.id === playlistId) {
+      playlist.videos = playlist.videos.concat(videoEmbedId);
+    }
+    return playlist;
+  });
+  return stateCopy;
+};
+
+const removeFromPlaylist = (state, { playlistId, videoEmbedId }) => {
+  const stateCopy = { ...state };
+  stateCopy.playlists = state.playlists.map((playlist) => {
+    if (playlist.id === playlistId) {
+      playlist.videos = playlist.videos.filter(
+        (embedId) => embedId !== videoEmbedId
+      );
+    }
+    return playlist;
+  });
+  return stateCopy;
+};
+
 export default function userReducer(state, action) {
   switch (action.type) {
     case userActionTypes.TOGGLE_LIKED_VIDEO:
       return toggleLikedVideo(state, action.payload);
     case userActionTypes.UPDATE_HISTORY:
       return updateHistory(state, action.payload);
+    case userActionTypes.CREATE_PLAYLIST:
+      return createPlaylist(state, action.payload);
+    case userActionTypes.ADD_TO_PLAYLIST:
+      return addToPlaylist(state, action.payload);
+    case userActionTypes.REMOVE_FROM_PLAYLIST:
+      return removeFromPlaylist(state, action.payload);
     default:
       return state;
   }

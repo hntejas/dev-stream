@@ -94,6 +94,7 @@
 }
 
 .video-page-container .card-video-thumbnail {
+    max-width: 50vw;
     width: 160px;
     height: auto;
 }

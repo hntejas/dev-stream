@@ -1,9 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { RiThumbUpFill, RiPlayListAddFill } from "react-icons/ri";
 import { IoIosShareAlt } from "react-icons/io";
 
 import VideoCard from "../VideoCard/VideoCard";
+import Modal from "../Modal/Modal";
+import PlaylistForm from "../Playlist/PlaylistForm/PlaylistForm";
 import { UserContext } from "../../store/UserContext/UserContext";
 
 import * as userActionTypes from "../../store/types/userActionTypes";
@@ -16,6 +18,12 @@ export default function VideoPage() {
   const { user, userDispatch } = useContext(UserContext);
 
   const { embedId } = useParams();
+
+  const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
+
+  const togglePlaylistModal = () => {
+    setIsPlaylistModalOpen(!isPlaylistModalOpen);
+  };
 
   useEffect(() => {
     userDispatch({
@@ -74,7 +82,7 @@ export default function VideoPage() {
             <div className="video-action-item">
               <IoIosShareAlt /> <span>SHARE</span>
             </div>
-            <div className="video-action-item">
+            <div className="video-action-item" onClick={togglePlaylistModal}>
               <RiPlayListAddFill /> <span>SAVE</span>
             </div>
           </div>
@@ -89,6 +97,14 @@ export default function VideoPage() {
           return <VideoCard video={video} key={video.id} />;
         })}
       </div>
+      <Modal isOpen={isPlaylistModalOpen} closeModal={togglePlaylistModal}>
+        <PlaylistForm
+          user={user}
+          userDispatch={userDispatch}
+          currentVideo={embedId}
+          onPlaylistModalClose={togglePlaylistModal}
+        />
+      </Modal>
     </div>
   );
 }

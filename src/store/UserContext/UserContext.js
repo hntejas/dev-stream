@@ -10,7 +10,7 @@ export const initialUserState = {
     {
       id: 1,
       name: "Playlist 1",
-      videos: [],
+      videos: ["iiADhChRriM"],
     },
   ],
 };
