@@ -6,6 +6,8 @@ import { UserContextProvider } from "./store/UserContext/UserContext";
 import Header from "./components/Header/Header";
 import VideoList from "./components/VideoList/VideoList";
 import LikedVideoList from "./components/LikedVideoList/LikedVideoList";
+import PlaylistPage from "./components/Playlist/PlaylistPage/PlaylistPage";
+import PlaylistVideos from "./components/Playlist/PlaylistVideos/PlaylistVideos";
 import History from "./components/History/History";
 import VideoPage from "./components/VideoPage/VideoPage";
 import Navigator from "./components/Navigator/Navigator";
@@ -21,6 +23,8 @@ export default function App() {
           <Routes>
             <Route path="/" element={<VideoList videos={videos} />}></Route>
             <Route path="/video/:embedId" element={<VideoPage />}></Route>
+            <Route path="/playlist" element={<PlaylistPage />} />
+            <Route path="/playlist/:playlistId" element={<PlaylistVideos />} />
             <Route path="/likes" element={<LikedVideoList />} />
             <Route path="/history" element={<History />} />
           </Routes>
