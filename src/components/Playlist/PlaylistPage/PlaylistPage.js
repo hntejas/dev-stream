@@ -23,21 +23,26 @@ export default function PlaylistPage() {
           const firstVideoThumbNail =
             firstVideoThumbNailObj && firstVideoThumbNailObj.thumbnailImgUrl;
           return (
-            <Link className="card" to={"/playlist/" + playlist.id}>
-              {playlist.videos.length > 0 ? (
-                <img
-                  className="card-video-thumbnail"
-                  src={firstVideoThumbNail}
-                />
-              ) : (
-                <div className="empty-videos">
-                  <span>Add Videos</span>
+            <Link
+              className="card"
+              to={"/playlist/" + playlist.id}
+              key={playlist.id}
+            >
+              <div className="playlist-img-container">
+                {playlist.videos.length > 0 ? (
+                  <img
+                    className="card-video-thumbnail"
+                    src={firstVideoThumbNail}
+                  />
+                ) : (
+                  <div className="empty-videos">
+                    <span>Add Videos</span>
+                  </div>
+                )}
+                <div className="playlist-overlay">
+                  <RiPlayListAddFill />
+                  <p>{playlist.videos.length} videos</p>
                 </div>
-              )}
-
-              <div className="playlist-overlay">
-                <RiPlayListAddFill />
-                <p>{playlist.videos.length} videos</p>
               </div>
               <p className="card-title">{playlist.name}</p>
             </Link>

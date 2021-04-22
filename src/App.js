@@ -1,5 +1,6 @@
 import "./styles.css";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import { UserContextProvider } from "./store/UserContext/UserContext";
 
@@ -13,9 +14,12 @@ import VideoPage from "./components/VideoPage/VideoPage";
 import Navigator from "./components/Navigator/Navigator";
 import { videos } from "./data";
 
+import "react-toastify/dist/ReactToastify.css";
+
 export default function App() {
   return (
     <div className="App">
+      <ToastContainer />
       <UserContextProvider>
         <Header />
         <Navigator />

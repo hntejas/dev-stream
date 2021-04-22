@@ -37,10 +37,11 @@ const createPlaylist = (state, { playlistName }) => {
 const addToPlaylist = (state, { playlistId, videoEmbedId }) => {
   const stateCopy = { ...state };
   stateCopy.playlists = state.playlists.map((playlist) => {
-    if (playlist.id === playlistId) {
-      playlist.videos = playlist.videos.concat(videoEmbedId);
+    const playlistCopy = { ...playlist };
+    if (playlist.id == playlistId) {
+      playlistCopy.videos = [...playlist.videos, videoEmbedId];
     }
-    return playlist;
+    return playlistCopy;
   });
   return stateCopy;
 };
@@ -48,12 +49,13 @@ const addToPlaylist = (state, { playlistId, videoEmbedId }) => {
 const removeFromPlaylist = (state, { playlistId, videoEmbedId }) => {
   const stateCopy = { ...state };
   stateCopy.playlists = state.playlists.map((playlist) => {
-    if (playlist.id === playlistId) {
-      playlist.videos = playlist.videos.filter(
+    const playlistCopy = { ...playlist };
+    if (playlist.id == playlistId) {
+      playlistCopy.videos = playlist.videos.filter(
         (embedId) => embedId !== videoEmbedId
       );
     }
-    return playlist;
+    return playlistCopy;
   });
   return stateCopy;
 };

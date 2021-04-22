@@ -9,7 +9,7 @@ import PlaylistForm from "../Playlist/PlaylistForm/PlaylistForm";
 import { UserContext } from "../../store/UserContext/UserContext";
 
 import * as userActionTypes from "../../store/types/userActionTypes";
-import { convertToShortNumber } from "../../utils";
+import { showToast, convertToShortNumber } from "../../utils";
 import { videos } from "../../data";
 
 import "./video-page.css";
@@ -23,6 +23,11 @@ export default function VideoPage() {
 
   const togglePlaylistModal = () => {
     setIsPlaylistModalOpen(!isPlaylistModalOpen);
+  };
+
+  const copyUrlHandler = () => {
+    navigator.clipboard.writeText(window.location.href);
+    showToast("Link copied to clipboard!");
   };
 
   useEffect(() => {
@@ -88,7 +93,7 @@ export default function VideoPage() {
                 {convertToShortNumber(isVideoLiked ? likes + 1 : likes)}
               </span>
             </div>
-            <div className="video-action-item">
+            <div className="video-action-item" onClick={copyUrlHandler}>
               <IoIosShareAlt /> <span>SHARE</span>
             </div>
             <div className="video-action-item" onClick={togglePlaylistModal}>

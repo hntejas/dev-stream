@@ -2,15 +2,28 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: 4rem;
 }
 
-.playlist-container .card {
+/* .playlist-container .card {
+    position: relative;
+} */
+
+.playlist-img-container {
+    width: 100%;
+    height: max-content;
     position: relative;
 }
 
 .playlist-container .card-title {
     margin: 0.5rem 0;
     font-size: 1.2rem;
+}
+
+.close-btn-container {
+    position: absolute;
+    top: 0.5rem;
+    left: 1rem;
 }
 
 .empty-videos {
@@ -31,7 +44,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    height: 140px;
+    height: 100%;
     width: 55%;
     background-color: rgba(0, 0, 0, 0.75);
     display: flex;

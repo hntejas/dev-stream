@@ -2,13 +2,16 @@ import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../../store/UserContext/UserContext";
 import { videos } from "../../../data";
+import { showToast } from "../../../utils";
 import VideoList from "../../VideoList/VideoList";
+
+import * as userActionTypes from "../../../store/types/userActionTypes";
 
 import "./playlist-videos.css";
 
 export default function PlaylistVideos() {
   const { playlistId } = useParams();
-  const { user } = useContext(UserContext);
+  const { user, userDispatch } = useContext(UserContext);
 
   let playlist = user.playlists.find((playlist) => playlist.id == playlistId);
 
@@ -27,10 +30,28 @@ export default function PlaylistVideos() {
     return videosToDisplay;
   }
 
+  const onRemoveHandler = (e, embedId) => {
+    e.preventDefault();
+    const userConsent = confirm("Removing video from playlist, are you sure?");
+    if (userConsent) {
+      userDispatch({
+        type: userActionTypes.REMOVE_FROM_PLAYLIST,
+        payload: {
+          playlistId: playlistId,
+          videoEmbedId: embedId,
+        },
+      });
+      showToast("Video removed");
+    }
+  };
+
   return (
     <div className="playlist-videos">
       <h2 className="section-heading">{playlist.name}</h2>
-      <VideoList videos={videosToDisplay}></VideoList>
+      <VideoList
+        videos={videosToDisplay}
+        onRemove={onRemoveHandler}
+      ></VideoList>
     </div>
   );
 }
