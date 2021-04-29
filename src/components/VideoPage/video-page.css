@@ -20,13 +20,10 @@
 }
 
 .video-details {
-
     display: inline-flex;
-
     align-items: center;
     justify-content: flex-start;
     flex-wrap: wrap;
-
     width: calc(100% - 1rem);
     padding: 0 0.5rem;
     margin-top: 0.5rem;
