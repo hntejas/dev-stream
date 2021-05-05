@@ -13,15 +13,16 @@ export default function History() {
   let videosToDisplay = [];
   videosToDisplay = getVideosToDisplay();
   function getVideosToDisplay() {
-    videos.forEach((video) => {
-      if (user.history.includes(video.embedId)) {
-        videosToDisplay.push(video);
-      }
+    user.history.forEach((videoEmbedId) => {
+      const historyVideo = videos.find(
+        (currVideo) => currVideo.embedId === videoEmbedId
+      );
+      videosToDisplay.push(historyVideo);
       if (videosToDisplay.length === user.history.length) {
         return videosToDisplay;
       }
     });
-    return videosToDisplay;
+    return videosToDisplay.reverse();
   }
 
   return (
