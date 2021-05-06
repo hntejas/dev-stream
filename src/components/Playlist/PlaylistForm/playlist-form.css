@@ -1,0 +1,53 @@
+.playlist-form {
+    max-width: calc(100% - 4rem);
+    background: #181818;
+    padding: 1rem;
+}
+
+.playlist-form .section-heading {
+    display: inline-block;
+    text-align: left;
+    width: calc(100% - 1.5rem);
+    padding-top: 0;
+    margin-top: 0rem;
+    margin-bottom: 0;
+}
+
+.playlist-list {
+    max-height: 40vh;
+    height: max-content;
+    overflow: auto;
+    padding: 0.5rem 0;
+    list-style: none;
+    padding-inline-start: 0;
+    text-align: left;
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+}
+
+.close {
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.playlist-list li {
+    margin: 0.5rem 0;
+}
+
+.input-playlist {
+    border: none;
+    background: black;
+    padding: 0.5rem;
+    color: white;
+    caret-color: white;
+}
+
+.input-playlist:focus {
+    outline: none;
+}
+
+.btn-playlist {
+    padding: 0.3rem 0.5rem;
+    color: #3EA6FF;
+    cursor: pointer;
+}
