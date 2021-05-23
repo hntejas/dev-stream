@@ -2,13 +2,14 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { UserContext } from "../../../store/UserContext/UserContext";
-import { videos } from "../../../data";
+import { useData } from "../../../store/DataContext/DataContext";
 import { RiPlayListAddFill } from "react-icons/ri";
 
 import "./playlist-page.css";
 
 export default function PlaylistPage() {
   const { user } = useContext(UserContext);
+  const { videos } = useData();
 
   return (
     <div>

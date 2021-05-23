@@ -7,15 +7,16 @@ import VideoCard from "../VideoCard/VideoCard";
 import Modal from "../Modal/Modal";
 import PlaylistForm from "../Playlist/PlaylistForm/PlaylistForm";
 import { UserContext } from "../../store/UserContext/UserContext";
+import { useData } from "../../store/DataContext/DataContext";
 
 import * as userActionTypes from "../../store/types/userActionTypes";
 import { showToast, convertToShortNumber } from "../../utils";
-import { videos } from "../../data";
 
 import "./video-page.css";
 
 export default function VideoPage() {
   const { user, userDispatch } = useContext(UserContext);
+  const { videos } = useData();
 
   const { embedId } = useParams();
 
@@ -44,9 +45,12 @@ export default function VideoPage() {
     });
   }, [embedId]);
 
-  const { title, views, age, channel, likes } = videos.find(
-    (video) => video.embedId === embedId
-  );
+  if (!videos || (videos && videos.length <= 0)) {
+    return <h3></h3>;
+  }
+
+  const { title, views, age, channel, likes } =
+    videos && videos.find((video) => video.embedId === embedId);
 
   const isVideoLiked = user.likedVideos.includes(embedId);
 

@@ -2,13 +2,13 @@ import { useContext } from "react";
 
 import VideoList from "../VideoList/VideoList";
 import { UserContext } from "../../store/UserContext/UserContext";
-
-import { videos } from "../../data";
+import { useData } from "../../store/DataContext/DataContext";
 
 import "./liked-video-list.css";
 
 export default function LikedVideoList() {
   const { user } = useContext(UserContext);
+  const { videos } = useData();
 
   let videosToDisplay = [];
   videosToDisplay = getVideosToDisplay();

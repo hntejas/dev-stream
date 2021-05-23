@@ -2,13 +2,13 @@ import { useContext } from "react";
 
 import VideoList from "../VideoList/VideoList";
 import { UserContext } from "../../store/UserContext/UserContext";
-
-import { videos } from "../../data";
+import { useData } from "../../store/DataContext/DataContext";
 
 import "./history.css";
 
 export default function History() {
   const { user } = useContext(UserContext);
+  const { videos } = useData();
 
   let videosToDisplay = [];
   videosToDisplay = getVideosToDisplay();

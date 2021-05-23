@@ -12,11 +12,13 @@ import PlaylistVideos from "./components/Playlist/PlaylistVideos/PlaylistVideos"
 import History from "./components/History/History";
 import VideoPage from "./components/VideoPage/VideoPage";
 import Navigator from "./components/Navigator/Navigator";
-import { videos } from "./data";
+
+import { useData } from "./store/DataContext/DataContext";
 
 import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
+  const { videos } = useData();
   return (
     <div className="App">
       <ToastContainer />
