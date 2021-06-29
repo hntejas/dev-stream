@@ -6,7 +6,7 @@ import { IoIosShareAlt } from "react-icons/io";
 import VideoCard from "../VideoCard/VideoCard";
 import Modal from "../Modal/Modal";
 import PlaylistForm from "../Playlist/PlaylistForm/PlaylistForm";
-import { UserContext } from "../../store/UserContext/UserContext";
+import { useUser } from "../../store/user";
 import { useData } from "../../store/DataContext/DataContext";
 
 import * as userActionTypes from "../../store/types/userActionTypes";
@@ -15,7 +15,7 @@ import { showToast, convertToShortNumber } from "../../utils";
 import "./video-page.css";
 
 export default function VideoPage() {
-  const { user, userDispatch } = useContext(UserContext);
+  const { user, userDispatch } = useUser();
   const { videos } = useData();
 
   const { embedId } = useParams();
@@ -77,7 +77,7 @@ export default function VideoPage() {
           ></iframe>
         </div>
         <div className="video-details">
-          <img src={channel.logo} className="channel-logo"></img>
+          <img src={channel.logo} className="channel-logo" loading="lazy" />
           <div className="card-video-stats">
             <p>{title}</p>
             <span className="card-video-views">

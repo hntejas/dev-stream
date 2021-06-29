@@ -1,5 +1,16 @@
 import * as userActionTypes from "../types/userActionTypes";
 
+const updateUserLogin = (state, { isLoggedIn, name }) => {
+  if (!isLoggedIn) {
+    localStorage.removeItem("cssFightAuth");
+  }
+  return {
+    ...state,
+    isLoggedIn: isLoggedIn,
+    name: isLoggedIn ? name : "",
+  };
+};
+
 const toggleLikedVideo = (state, { videoEmbedId, isVideoAlreadyLiked }) => {
   const stateCopy = { ...state };
   if (isVideoAlreadyLiked) {
@@ -62,6 +73,8 @@ const removeFromPlaylist = (state, { playlistId, videoEmbedId }) => {
 
 export default function userReducer(state, action) {
   switch (action.type) {
+    case userActionTypes.UPDATE_USER_LOGIN:
+      return updateUserLogin(state, action.payload);
     case userActionTypes.TOGGLE_LIKED_VIDEO:
       return toggleLikedVideo(state, action.payload);
     case userActionTypes.UPDATE_HISTORY:

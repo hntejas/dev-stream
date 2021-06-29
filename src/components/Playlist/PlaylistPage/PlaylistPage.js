@@ -1,14 +1,13 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { UserContext } from "../../../store/UserContext/UserContext";
+import { useUser } from "../../../store/user";
 import { useData } from "../../../store/DataContext/DataContext";
 import { RiPlayListAddFill } from "react-icons/ri";
 
 import "./playlist-page.css";
 
 export default function PlaylistPage() {
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
   const { videos } = useData();
 
   return (
@@ -34,6 +33,7 @@ export default function PlaylistPage() {
                   <img
                     className="card-video-thumbnail"
                     src={firstVideoThumbNail}
+                    loading="lazy"
                   />
                 ) : (
                   <div className="empty-videos">

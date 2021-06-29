@@ -1,9 +1,12 @@
 import { createContext, useReducer } from "react";
 import userReducer from "./userReducer";
+import * as userActionTypes from "../types/userActionTypes";
 
 export const UserContext = createContext();
 
 export const initialUserState = {
+  isLoggedIn: false,
+  name: "",
   history: [],
   likedVideos: ["No8qdcVYiQw", "u6_a0d94A1Q"],
   playlists: [
@@ -18,7 +21,7 @@ export const initialUserState = {
 export function UserContextProvider({ children }) {
   const [user, userDispatch] = useReducer(userReducer, initialUserState);
   return (
-    <UserContext.Provider value={{ user, userDispatch }}>
+    <UserContext.Provider value={{ user, userDispatch, userActionTypes }}>
       {children}
     </UserContext.Provider>
   );

@@ -1,6 +1,5 @@
-import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { UserContext } from "../../../store/UserContext/UserContext";
+import { useUser } from "../../../store/user";
 import { useData } from "../../../store/DataContext/DataContext";
 import { showToast } from "../../../utils";
 import VideoList from "../../VideoList/VideoList";
@@ -12,7 +11,7 @@ import "./playlist-videos.css";
 export default function PlaylistVideos() {
   const { playlistId } = useParams();
   const { videos } = useData();
-  const { user, userDispatch } = useContext(UserContext);
+  const { user, userDispatch } = useUser();
 
   let playlist = user.playlists.find((playlist) => playlist.id == playlistId);
 
