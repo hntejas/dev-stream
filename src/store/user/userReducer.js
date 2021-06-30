@@ -1,8 +1,8 @@
-import * as userActionTypes from "../types/userActionTypes";
+import * as userActionTypes from "./userActionTypes";
 
 const updateUserLogin = (state, { isLoggedIn, name }) => {
   if (!isLoggedIn) {
-    localStorage.removeItem("cssFightAuth");
+    localStorage.removeItem("devStreamAuth");
   }
   return {
     ...state,
@@ -11,33 +11,37 @@ const updateUserLogin = (state, { isLoggedIn, name }) => {
   };
 };
 
-const toggleLikedVideo = (state, { videoEmbedId, isVideoAlreadyLiked }) => {
+const loadUserData = (state, { user, playlists }) => {
+  return { ...state, ...user, playlists: playlists };
+};
+
+const toggleLikedVideo = (state, { video, isVideoAlreadyLiked }) => {
   const stateCopy = { ...state };
   if (isVideoAlreadyLiked) {
     stateCopy.likedVideos = state.likedVideos.filter(
-      (embedId) => embedId !== videoEmbedId
+      (likedVideo) => likedVideo.embedId !== video.embedId
     );
   } else {
-    stateCopy.likedVideos = state.likedVideos.concat(videoEmbedId);
+    stateCopy.likedVideos = state.likedVideos.concat(video);
   }
   return stateCopy;
 };
 
-const updateHistory = (state, { videoEmbedId }) => {
+const updateHistory = (state, { video }) => {
   const stateCopy = { ...state };
   const newHistory = state.history.filter(
-    (embedId) => embedId !== videoEmbedId
+    (historyVideo) => historyVideo.embedId !== video.embedId
   );
-  newHistory.push(videoEmbedId);
+  newHistory.push(video);
   stateCopy.history = newHistory;
   return stateCopy;
 };
 
-const createPlaylist = (state, { playlistName }) => {
+const createPlaylist = (state, { playlistId, playlistName }) => {
   const stateCopy = { ...state };
 
   stateCopy.playlists = state.playlists.concat({
-    id: state.playlists.length + 1 || 1,
+    id: playlistId,
     name: playlistName,
     videos: [],
   });
@@ -45,25 +49,48 @@ const createPlaylist = (state, { playlistName }) => {
   return stateCopy;
 };
 
-const addToPlaylist = (state, { playlistId, videoEmbedId }) => {
+const updatePlaylistName = (state, { playlistId, playlistName }) => {
+  const stateCopy = { ...state };
+
+  stateCopy.playlists = state.playlists.map((playlist) => {
+    if (playlist.id === playlistId) {
+      playlist.name = playlistName;
+    }
+    return playlist;
+  });
+
+  return stateCopy;
+};
+
+const removePlaylist = (state, { playlistId }) => {
+  const stateCopy = { ...state };
+
+  stateCopy.playlists = state.playlists.filter(
+    (playlist) => playlist.id !== playlistId
+  );
+
+  return stateCopy;
+};
+
+const addToPlaylist = (state, { playlistId, video }) => {
   const stateCopy = { ...state };
   stateCopy.playlists = state.playlists.map((playlist) => {
     const playlistCopy = { ...playlist };
     if (playlist.id == playlistId) {
-      playlistCopy.videos = [...playlist.videos, videoEmbedId];
+      playlistCopy.videos = [...playlist.videos, video];
     }
     return playlistCopy;
   });
   return stateCopy;
 };
 
-const removeFromPlaylist = (state, { playlistId, videoEmbedId }) => {
+const removeFromPlaylist = (state, { playlistId, video }) => {
   const stateCopy = { ...state };
   stateCopy.playlists = state.playlists.map((playlist) => {
     const playlistCopy = { ...playlist };
     if (playlist.id == playlistId) {
       playlistCopy.videos = playlist.videos.filter(
-        (embedId) => embedId !== videoEmbedId
+        (playlistVideo) => playlistVideo.embedId !== video.embedId
       );
     }
     return playlistCopy;
@@ -75,12 +102,18 @@ export default function userReducer(state, action) {
   switch (action.type) {
     case userActionTypes.UPDATE_USER_LOGIN:
       return updateUserLogin(state, action.payload);
+    case userActionTypes.UPDATE_USER_DATA:
+      return loadUserData(state, action.payload);
     case userActionTypes.TOGGLE_LIKED_VIDEO:
       return toggleLikedVideo(state, action.payload);
     case userActionTypes.UPDATE_HISTORY:
       return updateHistory(state, action.payload);
     case userActionTypes.CREATE_PLAYLIST:
       return createPlaylist(state, action.payload);
+    case userActionTypes.UPDATE_PLAYLIST_NAME:
+      return updatePlaylistName(state, action.payload);
+    case userActionTypes.REMOVE_PLAYLIST:
+      return removePlaylist(state, action.payload);
     case userActionTypes.ADD_TO_PLAYLIST:
       return addToPlaylist(state, action.payload);
     case userActionTypes.REMOVE_FROM_PLAYLIST:

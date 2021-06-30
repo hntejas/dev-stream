@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getAuthToken } from "../utils";
 
-export async function getUserData(playlistName) {
+export async function getUserData() {
   try {
     const response = await axios.get(
       "https://dev-stream-api.hntejas.repl.co/user",
@@ -16,7 +16,10 @@ export async function getUserData(playlistName) {
     if (axios.isAxiosError(error)) {
       const serverError = error;
       if (serverError && serverError.response) {
-        return serverError.response.data;
+        return {
+          ...serverError.response.data,
+          status: serverError.response.status,
+        };
       }
     }
   }
@@ -40,7 +43,10 @@ export async function likeVideo(videoId) {
     if (axios.isAxiosError(error)) {
       const serverError = error;
       if (serverError && serverError.response) {
-        return serverError.response.data;
+        return {
+          ...serverError.response.data,
+          status: serverError.response.status,
+        };
       }
     }
   }
@@ -64,7 +70,37 @@ export async function unlikeVideo(videoId) {
     if (axios.isAxiosError(error)) {
       const serverError = error;
       if (serverError && serverError.response) {
-        return serverError.response.data;
+        return {
+          ...serverError.response.data,
+          status: serverError.response.status,
+        };
+      }
+    }
+  }
+}
+
+export async function updateHistory(videoId) {
+  try {
+    const response = await axios.post(
+      "https://dev-stream-api.hntejas.repl.co/user/history",
+      {
+        videoId,
+      },
+      {
+        headers: {
+          Authorization: getAuthToken(),
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const serverError = error;
+      if (serverError && serverError.response) {
+        return {
+          ...serverError.response.data,
+          status: serverError.response.status,
+        };
       }
     }
   }

@@ -24,11 +24,15 @@ export function showToast(text) {
 
 export const addTokenToStorage = (token) => {
   localStorage.setItem(
-    "cssFightAuth",
+    "devStreamAuth",
     JSON.stringify({ isLoggedIn: true, token: token })
   );
 };
 
 export const getAuthToken = () =>
-  localStorage.getItem("cssFightAuth") &&
-  JSON.parse(localStorage.getItem("cssFightAuth"))["token"];
+  localStorage.getItem("devStreamAuth") &&
+  JSON.parse(localStorage.getItem("devStreamAuth"))["token"];
+
+export const isLoggedInLocally = () =>
+  localStorage.getItem("devStreamAuth") &&
+  JSON.parse(localStorage.getItem("devStreamAuth"))["isLoggedIn"];

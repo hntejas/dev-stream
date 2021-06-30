@@ -14,8 +14,9 @@ import PlaylistVideos from "./components/Playlist/PlaylistVideos/PlaylistVideos"
 import History from "./components/History/History";
 import VideoPage from "./components/VideoPage/VideoPage";
 import Navigator from "./components/Navigator/Navigator";
+import PrivateRoute from "./PrivateRoute";
 
-import { useData } from "./store/DataContext/DataContext";
+import { useData } from "./store/data";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -33,10 +34,13 @@ export default function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/" element={<VideoList videos={videos} />}></Route>
             <Route path="/video/:embedId" element={<VideoPage />}></Route>
-            <Route path="/playlist" element={<PlaylistPage />} />
-            <Route path="/playlist/:playlistId" element={<PlaylistVideos />} />
-            <Route path="/likes" element={<LikedVideoList />} />
-            <Route path="/history" element={<History />} />
+            <PrivateRoute path="/playlist" element={<PlaylistPage />} />
+            <PrivateRoute
+              path="/playlist/:playlistId"
+              element={<PlaylistVideos />}
+            />
+            <PrivateRoute path="/likes" element={<LikedVideoList />} />
+            <PrivateRoute path="/history" element={<History />} />
           </Routes>
         </div>
       </UserContextProvider>

@@ -4,7 +4,7 @@ import Loader from "../../components/Loader/Loader";
 
 import axios from "axios";
 
-const DataContext = createContext();
+export const DataContext = createContext();
 
 export default function DataContextProvider({ children }) {
   const [videos, setVideos] = useState([]);
@@ -19,7 +19,6 @@ export default function DataContextProvider({ children }) {
         setShowLoading(false);
       })
       .catch((e) => {
-        console.log(e);
         setShowLoading(false);
       });
   }, []);
@@ -33,7 +32,3 @@ export default function DataContextProvider({ children }) {
     </>
   );
 }
-
-export const useData = () => {
-  return useContext(DataContext);
-};

@@ -19,7 +19,38 @@ export async function createPlaylist(playlistName) {
     if (axios.isAxiosError(error)) {
       const serverError = error;
       if (serverError && serverError.response) {
-        return serverError.response.data;
+        return {
+          ...serverError.response.data,
+          status: serverError.response.status,
+        };
+      }
+    }
+  }
+}
+
+export async function updatePlaylist(playlistId, playlistName) {
+  try {
+    const response = await axios.put(
+      "https://dev-stream-api.hntejas.repl.co/playlist",
+      {
+        playlistId,
+        playlistName,
+      },
+      {
+        headers: {
+          Authorization: getAuthToken(),
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const serverError = error;
+      if (serverError && serverError.response) {
+        return {
+          ...serverError.response.data,
+          status: serverError.response.status,
+        };
       }
     }
   }
@@ -44,7 +75,10 @@ export async function addVideoToPlaylist(playlistId, videoId) {
     if (axios.isAxiosError(error)) {
       const serverError = error;
       if (serverError && serverError.response) {
-        return serverError.response.data;
+        return {
+          ...serverError.response.data,
+          status: serverError.response.status,
+        };
       }
     }
   }
@@ -69,7 +103,10 @@ export async function removeVideoFromPlaylist(playlistId, videoId) {
     if (axios.isAxiosError(error)) {
       const serverError = error;
       if (serverError && serverError.response) {
-        return serverError.response.data;
+        return {
+          ...serverError.response.data,
+          status: serverError.response.status,
+        };
       }
     }
   }
@@ -90,7 +127,10 @@ export async function deletePlaylist(playlistId) {
     if (axios.isAxiosError(error)) {
       const serverError = error;
       if (serverError && serverError.response) {
-        return serverError.response.data;
+        return {
+          ...serverError.response.data,
+          status: serverError.response.status,
+        };
       }
     }
   }

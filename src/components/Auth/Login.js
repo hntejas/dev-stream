@@ -60,13 +60,14 @@ export default function Login() {
             name: response.name,
           },
         });
+        setIsLoading(false);
         navigate(from || "/");
       } else {
         showToast(
           <p>Login failed! {response.error && response.error.message}</p>
         );
+        setIsLoading(false);
       }
-      setIsLoading(false);
     }
   };
 

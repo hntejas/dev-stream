@@ -14,7 +14,7 @@ export default function VideoCard({ video, onRemove }) {
       {!!onRemove ? (
         <div
           className="remove-btn-container"
-          onClick={(e) => onRemove(e, embedId)}
+          onClick={(e) => onRemove(e, video)}
         >
           <span className="close">&times;</span>
         </div>
