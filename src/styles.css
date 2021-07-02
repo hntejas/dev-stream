@@ -13,17 +13,13 @@ body {
 
 .body-container {
   margin-top: 3.2rem;
-  margin-left: 4rem;
+  margin-left: 7.5rem;
   margin-right: 4rem;
 }
 
 .section-heading {
   font-weight: 500;
   padding-top: 1rem;
-}
-
-.Toastify__progress-bar {
-  height: 2px !important;
 }
 
 @media (max-width: 768px) {

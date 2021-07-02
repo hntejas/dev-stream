@@ -1,7 +1,7 @@
 import "./navigator.css";
 import { NavLink } from "react-router-dom";
 import AuthLink from "./AuthPrompLink";
-import { IoHomeSharp } from "react-icons/io5";
+import { IoHomeOutline } from "react-icons/io5";
 import { RiPlayListAddFill } from "react-icons/ri";
 import { AiOutlineLike, AiOutlineFieldTime } from "react-icons/ai";
 
@@ -9,7 +9,7 @@ export default function Navigator() {
   return (
     <aside className="navigator">
       <NavLink to="/" activeClassName="active-link" className="nav-item" end>
-        <IoHomeSharp />
+        <IoHomeOutline />
         <p className="nav-item-name">Home</p>
       </NavLink>
       <AuthLink

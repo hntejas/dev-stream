@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { BiLogIn } from "react-icons/bi";
 import "./header.css";
 import { useUser } from "../../store/user";
+import { showToast } from "../../utils";
 
 export default function Header() {
   const { user, userDispatch, userActionTypes } = useUser();
@@ -13,6 +14,7 @@ export default function Header() {
         isLoggedIn: false,
       },
     });
+    showToast(<p>Logged out successfully!</p>);
   };
 
   return (

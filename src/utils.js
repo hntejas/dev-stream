@@ -14,10 +14,9 @@ export function convertToShortNumber(labelValue) {
 }
 
 export function showToast(text) {
-  toast(text, {
+  toast.dark(text, {
     position: toast.POSITION.TOP_RIGHT,
     autoClose: 2000,
-    type: toast.dark,
     style: { background: "#181818", minHeight: "2rem" },
   });
 }

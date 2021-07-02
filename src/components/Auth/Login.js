@@ -60,6 +60,7 @@ export default function Login() {
             name: response.name,
           },
         });
+        showToast("Login Successful");
         setIsLoading(false);
         navigate(from || "/");
       } else {
