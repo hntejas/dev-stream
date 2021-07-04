@@ -14,12 +14,17 @@ export default function VideoCard({ video, onRemove }) {
       {!!onRemove ? (
         <div
           className="remove-btn-container"
-          onClick={(e) => onRemove(e, embedId)}
+          onClick={(e) => onRemove(e, video)}
         >
           <span className="close">&times;</span>
         </div>
       ) : null}
-      <img className="card-video-thumbnail" alt={title} src={thumbnailImgUrl} />
+      <img
+        className="card-video-thumbnail"
+        alt={title}
+        src={thumbnailImgUrl}
+        loading="lazy"
+      />
       <div className="card-details">
         <p className="card-title">{title}</p>
         <p className="card-channel-title">{channel.title}</p>

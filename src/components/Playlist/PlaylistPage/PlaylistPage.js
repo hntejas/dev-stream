@@ -1,23 +1,25 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { UserContext } from "../../../store/UserContext/UserContext";
-import { videos } from "../../../data";
+import { useUser } from "../../../store/user";
+import { useData } from "../../../store/data";
 import { RiPlayListAddFill } from "react-icons/ri";
 
 import "./playlist-page.css";
 
 export default function PlaylistPage() {
-  const { user } = useContext(UserContext);
+  const { user } = useUser();
+  const { videos } = useData();
 
   return (
-    <div>
+    <>
       <h2 className="section-heading">Playlist</h2>
 
       <div className="playlist-container">
         {user.playlists.map((playlist) => {
           const firstVideoThumbNailObj = videos.find(
-            (video) => video.embedId === playlist.videos[0]
+            (video) =>
+              video.embedId ===
+              (playlist.videos.length > 0 && playlist.videos[0].embedId)
           );
 
           const firstVideoThumbNail =
@@ -33,6 +35,7 @@ export default function PlaylistPage() {
                   <img
                     className="card-video-thumbnail"
                     src={firstVideoThumbNail}
+                    loading="lazy"
                   />
                 ) : (
                   <div className="empty-videos">
@@ -49,6 +52,6 @@ export default function PlaylistPage() {
           );
         })}
       </div>
-    </div>
+    </>
   );
 }

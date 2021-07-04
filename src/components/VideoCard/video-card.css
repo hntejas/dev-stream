@@ -1,6 +1,6 @@
 .card {
   width: 250px;
-  margin: 0.5rem;
+  margin: 0.75rem;
   cursor: pointer;
   color: white;
   text-decoration: none;
@@ -68,5 +68,6 @@
 @media (max-width: 550px) {
   .card {
     width: 100%;
+    margin: 0.5rem;
   }
 }

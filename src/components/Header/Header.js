@@ -1,10 +1,37 @@
-import { Link } from "react-router-dom"
-import "./header.css"
+import { Link } from "react-router-dom";
+import { BiLogIn } from "react-icons/bi";
+import "./header.css";
+import { useUser } from "../../store/user";
+import { showToast } from "../../utils";
 
-export default function Header(){
-    return <Link className="header" to="/">
-       <div className="header-logo">
+export default function Header() {
+  const { user, userDispatch, userActionTypes } = useUser();
+
+  const logoutUser = () => {
+    userDispatch({
+      type: userActionTypes.UPDATE_USER_LOGIN,
+      payload: {
+        isLoggedIn: false,
+      },
+    });
+    showToast(<p>Logged out successfully!</p>);
+  };
+
+  return (
+    <div className="header">
+      <Link className="header-logo" to="/">
         <span style={{ color: "red" }}>Dev</span> Stream
-      </div>
-    </Link>
+      </Link>
+
+      {user.isLoggedIn ? (
+        <div className="header-auth" onClick={logoutUser}>
+          <BiLogIn /> Logout
+        </div>
+      ) : (
+        <Link className="header-auth" to="/login">
+          <BiLogIn /> Login
+        </Link>
+      )}
+    </div>
+  );
 }

@@ -1,55 +1,126 @@
-import { useContext } from "react";
-import { useParams } from "react-router-dom";
-import { UserContext } from "../../../store/UserContext/UserContext";
-import { videos } from "../../../data";
+import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useUser } from "../../../store/user";
+import {
+  removeVideoFromPlaylist,
+  updatePlaylist as updatePlaylistName,
+  deletePlaylist,
+} from "../../../services/playlist.service";
 import { showToast } from "../../../utils";
 import VideoList from "../../VideoList/VideoList";
 
-import * as userActionTypes from "../../../store/types/userActionTypes";
+import { MdEdit, MdDelete } from "react-icons/md";
 
 import "./playlist-videos.css";
 
 export default function PlaylistVideos() {
   const { playlistId } = useParams();
-  const { user, userDispatch } = useContext(UserContext);
+  const { user, userDispatch, userActionTypes } = useUser();
+  const [editMode, setEditMode] = useState(false);
+  const navigate = useNavigate();
 
-  let playlist = user.playlists.find((playlist) => playlist.id == playlistId);
+  let playlist =
+    user.playlists.find((playlist) => playlist.id == playlistId) || [];
 
-  let videosToDisplay = [];
-  videosToDisplay = getVideosToDisplay();
+  const [playlistName, setPlaylistName] = useState(playlist.name);
 
-  function getVideosToDisplay() {
-    videos.forEach((video) => {
-      if (playlist.videos.includes(video.embedId)) {
-        videosToDisplay.push(video);
-      }
-      if (videosToDisplay.length === playlist.videos.length) {
-        return videosToDisplay;
-      }
-    });
-    return videosToDisplay;
-  }
-
-  const onRemoveHandler = (e, embedId) => {
+  const onRemoveHandler = async (e, video) => {
     e.preventDefault();
     const userConsent = confirm("Removing video from playlist, are you sure?");
     if (userConsent) {
+      const response = await removeVideoFromPlaylist(playlistId, video.id);
+      if (response.success) {
+        userDispatch({
+          type: userActionTypes.REMOVE_FROM_PLAYLIST,
+          payload: {
+            playlistId: playlistId,
+            video: video,
+          },
+        });
+      } else {
+        if (response.status === 401) {
+          userDispatch({
+            type: userActionTypes.UPDATE_USER_LOGIN,
+            payload: {
+              isLoggedIn: false,
+            },
+          });
+        }
+      }
+      showToast("Video removed");
+    }
+  };
+
+  const toggleEditMode = () => {
+    setPlaylistName(playlist.name);
+    setEditMode((currentValue) => {
+      return !currentValue;
+    });
+  };
+
+  const updatePlaylist = async () => {
+    const response = await updatePlaylistName(playlist.id, playlistName);
+    if (response.success) {
       userDispatch({
-        type: userActionTypes.REMOVE_FROM_PLAYLIST,
+        type: userActionTypes.UPDATE_PLAYLIST_NAME,
         payload: {
-          playlistId: playlistId,
-          videoEmbedId: embedId,
+          playlistId: playlist.id,
+          playlistName: playlistName,
         },
       });
-      showToast("Video removed");
+      setEditMode(false);
+    }
+  };
+
+  const removePlaylist = async () => {
+    if (confirm("You are about to delete the playlist, are you sure?")) {
+      const response = await deletePlaylist(playlist.id);
+      if (response.success) {
+        userDispatch({
+          type: userActionTypes.REMOVE_PLAYLIST,
+          payload: {
+            playlistId: playlistId,
+          },
+        });
+        navigate("/playlist");
+      }
     }
   };
 
   return (
     <div className="playlist-videos">
-      <h2 className="section-heading">{playlist.name}</h2>
+      {editMode ? (
+        <>
+          <input
+            className="playlist-input"
+            value={playlistName}
+            onChange={(e) => {
+              setPlaylistName(e.target.value);
+            }}
+          />
+          <button className="playlist-action-btn" onClick={updatePlaylist}>
+            Save
+          </button>
+          <button className="playlist-action-btn" onClick={toggleEditMode}>
+            Discard
+          </button>
+        </>
+      ) : (
+        <div className="playlist-header">
+          <h2 className="section-heading">{playlist.name}</h2>
+          <div className="playlist-action-container">
+            <span onClick={toggleEditMode}>
+              <MdEdit />
+            </span>
+            <span>
+              <MdDelete onClick={removePlaylist} />
+            </span>
+          </div>
+        </div>
+      )}
+
       <VideoList
-        videos={videosToDisplay}
+        videos={playlist.videos}
         onRemove={onRemoveHandler}
       ></VideoList>
     </div>

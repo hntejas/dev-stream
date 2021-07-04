@@ -1,28 +1,37 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { RiThumbUpFill, RiPlayListAddFill } from "react-icons/ri";
 import { IoIosShareAlt } from "react-icons/io";
 
 import VideoCard from "../VideoCard/VideoCard";
 import Modal from "../Modal/Modal";
+import AuthPromptModal from "../Auth/AuthPromptModal";
 import PlaylistForm from "../Playlist/PlaylistForm/PlaylistForm";
-import { UserContext } from "../../store/UserContext/UserContext";
+import { useUser } from "../../store/user";
+import { useData } from "../../store/data";
+import {
+  likeVideo,
+  unlikeVideo,
+  updateHistory,
+} from "../../services/user.service";
 
-import * as userActionTypes from "../../store/types/userActionTypes";
 import { showToast, convertToShortNumber } from "../../utils";
-import { videos } from "../../data";
 
 import "./video-page.css";
 
 export default function VideoPage() {
-  const { user, userDispatch } = useContext(UserContext);
+  const { user, userDispatch, userActionTypes } = useUser();
+  const { videos } = useData();
 
   const { embedId } = useParams();
 
   const [isPlaylistModalOpen, setIsPlaylistModalOpen] = useState(false);
+  const [showAuthPrompt, setShowAuthPrompt] = useState(false);
 
   const togglePlaylistModal = () => {
-    setIsPlaylistModalOpen(!isPlaylistModalOpen);
+    user.isLoggedIn
+      ? setIsPlaylistModalOpen(!isPlaylistModalOpen)
+      : setShowAuthPrompt(true);
   };
 
   const copyUrlHandler = () => {
@@ -30,34 +39,66 @@ export default function VideoPage() {
     showToast("Link copied to clipboard!");
   };
 
-  useEffect(() => {
-    userDispatch({
-      type: userActionTypes.UPDATE_HISTORY,
-      payload: {
-        videoEmbedId: embedId,
-      },
-    });
+  useEffect(async () => {
+    if (videos.length > 0 && user.isLoggedIn) {
+      const currentVideo =
+        videos && videos.find((video) => video.embedId === embedId);
+      const response = await updateHistory(currentVideo.id);
+      if (response.success) {
+        userDispatch({
+          type: userActionTypes.UPDATE_HISTORY,
+          payload: {
+            video: currentVideo,
+          },
+        });
+      }
+    }
+
     window.scroll({
       top: 0,
       left: 0,
       behavior: "smooth",
     });
-  }, [embedId]);
+  }, [embedId, videos]);
 
-  const { title, views, age, channel, likes } = videos.find(
-    (video) => video.embedId === embedId
-  );
+  if (!videos || (videos && videos.length <= 0)) {
+    return <h3></h3>;
+  }
 
-  const isVideoLiked = user.likedVideos.includes(embedId);
+  const currentVideo =
+    videos && videos.find((video) => video.embedId === embedId);
+  const { title, views, age, channel, likes } = currentVideo;
 
-  const videoLikeHandler = () => {
+  const isVideoLiked = !!user.likedVideos.find((video) => {
+    return video.embedId === embedId;
+  });
+
+  const videoLikeHandler = async () => {
+    if (!user.isLoggedIn) {
+      setShowAuthPrompt(true);
+      return;
+    }
+    const promise = isVideoLiked
+      ? unlikeVideo(currentVideo.id)
+      : likeVideo(currentVideo.id);
     userDispatch({
       type: userActionTypes.TOGGLE_LIKED_VIDEO,
       payload: {
-        videoEmbedId: embedId,
+        video: currentVideo,
         isVideoAlreadyLiked: isVideoLiked,
       },
     });
+
+    const response = await promise;
+    if (!response.success) {
+      userDispatch({
+        type: userActionTypes.TOGGLE_LIKED_VIDEO,
+        payload: {
+          video: currentVideo,
+          isVideoAlreadyLiked: isVideoLiked,
+        },
+      });
+    }
   };
 
   return (
@@ -73,7 +114,7 @@ export default function VideoPage() {
           ></iframe>
         </div>
         <div className="video-details">
-          <img src={channel.logo} className="channel-logo"></img>
+          <img src={channel.logo} className="channel-logo" loading="lazy" />
           <div className="card-video-stats">
             <p>{title}</p>
             <span className="card-video-views">
@@ -111,11 +152,15 @@ export default function VideoPage() {
           return <VideoCard video={video} key={video.id} />;
         })}
       </div>
+      <AuthPromptModal
+        isOpen={showAuthPrompt}
+        closeModal={() => {
+          setShowAuthPrompt(false);
+        }}
+      />
       <Modal isOpen={isPlaylistModalOpen} closeModal={togglePlaylistModal}>
         <PlaylistForm
-          user={user}
-          userDispatch={userDispatch}
-          currentVideo={embedId}
+          currentVideo={currentVideo}
           onPlaylistModalClose={togglePlaylistModal}
         />
       </Modal>

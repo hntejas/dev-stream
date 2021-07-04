@@ -1,3 +1,41 @@
 .playlist-videos .video-list {
     margin-top: 1rem;
 }
+
+.playlist-videos .section-heading {
+    padding-top: 0;
+}
+
+.playlist-header {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.playlist-action-container {
+    margin-left: 1rem;
+    background: #252525;
+    border-radius: 5px;
+}
+
+.playlist-action-container svg {
+    margin: 0 5px;
+    font-size: 1.2rem;
+    padding: 10px 5px;
+    cursor: pointer;
+}
+
+.playlist-input {
+    margin: 1rem 0.5rem;
+    padding: 0.3rem 0.5rem;
+}
+
+.playlist-action-btn {
+    color: white;
+    background: 0;
+    border: none;
+    padding: 0.3rem 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+}

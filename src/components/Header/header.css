@@ -2,13 +2,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 0.5rem;
+    padding: 0 1rem;
     height: 3.2rem;
     background: #252525;
     color: white;
     text-decoration: none;
     position: fixed;
-    width: 100%;
+    width: calc(100% - 2rem);
     top: 0;
     z-index: 10;
 }
@@ -16,4 +16,20 @@
 .header-logo {
     font-size: 1.8rem;
     font-weight: 500;
+    color: white;
+    text-decoration: none;
+}
+
+.header-auth {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: white;
+    text-decoration: none;
+}
+
+.header-auth svg {
+    font-size: 1.4rem;
+    margin-right: 0.5rem;
 }

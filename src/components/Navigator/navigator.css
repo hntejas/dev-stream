@@ -32,6 +32,33 @@
     background: #181818;
 }
 
+.prompt-btn-container {
+    width: 100%;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.filled-action-btn {
+    padding: 0.6rem 0.6rem;
+    background: #2874f0;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+
+.outline-btn {
+    background: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
 @media (max-width: 768px) {
     .navigator {
         top: unset;

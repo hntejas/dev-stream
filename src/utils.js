@@ -14,10 +14,24 @@ export function convertToShortNumber(labelValue) {
 }
 
 export function showToast(text) {
-  toast(text, {
+  toast.dark(text, {
     position: toast.POSITION.TOP_RIGHT,
     autoClose: 2000,
-    type: toast.dark,
     style: { background: "#181818", minHeight: "2rem" },
   });
 }
+
+export const addTokenToStorage = (token) => {
+  localStorage.setItem(
+    "devStreamAuth",
+    JSON.stringify({ isLoggedIn: true, token: token })
+  );
+};
+
+export const getAuthToken = () =>
+  localStorage.getItem("devStreamAuth") &&
+  JSON.parse(localStorage.getItem("devStreamAuth"))["token"];
+
+export const isLoggedInLocally = () =>
+  localStorage.getItem("devStreamAuth") &&
+  JSON.parse(localStorage.getItem("devStreamAuth"))["isLoggedIn"];
