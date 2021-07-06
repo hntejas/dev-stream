@@ -98,6 +98,17 @@ export default function Login() {
     return isFormValid;
   };
 
+  const addTestCredentials = () => {
+    setUserData((state) => {
+      const stateCopy = { ...state };
+      stateCopy.email.value = "ironman@avengers.com";
+      stateCopy.email.isValid = true;
+      stateCopy.password.value = "password";
+      stateCopy.password.isValid = true;
+      return stateCopy;
+    });
+  };
+
   return (
     <div className="auth-container">
       <form className="auth-form" onSubmit={onSubmit}>
@@ -143,6 +154,13 @@ export default function Login() {
           <Link state={{ from: from }} replace to={"/signup?from=" + from}>
             Signup
           </Link>
+        </p>
+        <p>
+          Click{" "}
+          <span className="inline-btn" onClick={addTestCredentials}>
+            here
+          </span>{" "}
+          to use test credentials
         </p>
       </form>
     </div>
