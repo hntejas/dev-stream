@@ -72,3 +72,8 @@
   font-size: 0.7rem;
   border-radius: 0.3rem;
 }
+
+.inline-btn {
+  text-decoration: underline;
+  cursor: pointer;
+}
