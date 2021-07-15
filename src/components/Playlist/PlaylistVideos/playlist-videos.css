@@ -24,6 +24,7 @@
     font-size: 1.2rem;
     padding: 10px 5px;
     cursor: pointer;
+    box-sizing: content-box;
 }
 
 .playlist-input {

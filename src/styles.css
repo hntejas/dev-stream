@@ -6,6 +6,10 @@
   color: white;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background: #181818;
   margin: 0;
